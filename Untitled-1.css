@@ -1,0 +1,133 @@
+/* Temel sıfırlama ve kutu boyutlandırma */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Sayfa düzeni ve arka plan */
+body {
+    background-color: black;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+
+/* Yağmur için konteyner */
+.rain-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Buton stilleri */
+.rain-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background-color: black;
+    color: white;
+    font-size: 30px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+
+
+/* Buton kenarlık animasyonu */
+.rain-button::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #FF1493 0deg, #FF1493 15deg, transparent 15deg, transparent 360deg);
+    animation: rotateBorder 0.8s linear infinite;
+    mask: radial-gradient(farthest-side, transparent calc(100% - 3px), black 100%);
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), black 100%);
+}
+
+@keyframes rotateBorder {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Yanıp sönen mesajlar */
+.explosion-message,
+.under-message {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 20;
+}
+
+/* Baş mesaj rengi ve gölgeleme */
+.explosion-message {
+    top: 20%;
+    color: #FF1493;
+    text-shadow: 0 0 10px #FF1493, 0 0 20px #FF1493, 0 0 30px #FF1493;
+}
+
+/* Alt mesaj rengi ve gölgeleme */
+.under-message {
+    bottom: 20%;
+    font-size: 36px;
+    color: #00FF00;
+    text-shadow: 0 0 10px #00FF00, 0 0 20px #00FF00, 0 0 30px #00FF00;
+}
+
+/* Yanıp sönme animasyonu */
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Yağmur ve kalp efektlerinin animasyonu */
+.rain,
+.heart {
+    position: absolute;
+    top: -50px;
+    font-size: 30px;
+    animation: fall 1s infinite;
+}
+
+/* Kalp damlasının boyutunu büyütme */
+.heart {
+    color: #FF1493;
+    font-size: 40px;
+}
+
+/* Yağmur damlalarının düşüş animasyonu */
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
